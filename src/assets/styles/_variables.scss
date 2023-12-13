@@ -1,0 +1,30 @@
+:root {
+  --color-black-main: #121435;
+
+  --color-gray-main: #8e8e93;
+
+  --color-gray-3: #c7c7cc;
+
+  --color-gray-5: #f2f2f7;
+
+  --color-white-main: #ffffff;
+
+  --color-yellow-main: #ffcc02;
+
+  --color-beige-light: #faf9f0;
+
+  --color-beige-main: #edebca;
+
+  --color-tomato-main: #ff5722;
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-text-main: var(--color-black-main);
+  --color-text-secondary: var(--color-gray-main);
+
+  --color-background-main: var(--color-white-main);
+  --color-background-soft: var(--color-gray-5);
+
+  --color-divider: var(--color-gray-3);
+}
