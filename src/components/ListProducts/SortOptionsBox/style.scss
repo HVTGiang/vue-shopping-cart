@@ -1,0 +1,36 @@
+.sort-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  & .sort__title {
+  }
+
+  & .sort__chosen-item {
+    cursor: pointer;
+    padding: 5px 20px;
+    border-radius: 8px;
+    background-color: var(--color-background-soft);
+  }
+
+  & .sort__options {
+    position: absolute;
+    right: 0;
+    top: 120%;
+    background-color: var(--color-background-main);
+    padding: 0;
+    border-radius: 8px;
+    min-width: 200px;
+    box-shadow: 0 0 3px 1px var(--color-gray-3);
+  }
+
+  & .sort__option {
+    cursor: pointer;
+    padding: 5px 20px;
+
+    &:hover {
+      background-color: var(--color-background-soft);
+    }
+  }
+}

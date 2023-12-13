@@ -1,0 +1,20 @@
+.cart-summary {
+  position: relative;
+  cursor: pointer;
+
+  &__count-badge {
+    position: absolute;
+    top: -10px;
+    right: -12px;
+    font-size: 10px;
+    background-color: var(--color-black-main);
+    border: 3px solid var(--color-background-main);
+    color: var(--color-background-main);
+    border-radius: 50px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

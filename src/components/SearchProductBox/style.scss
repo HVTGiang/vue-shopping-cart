@@ -1,0 +1,25 @@
+.search-box {
+  position: relative;
+  height: fit-content;
+
+  & > .search-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+  }
+
+  & > .input-field {
+    display: block;
+    width: 100%;
+    padding: 15px 10px 15px 45px;
+    border: none;
+    background-color: var(--color-background-soft);
+    border-radius: 100px;
+
+    &::placeholder {
+      color: var(--color-text-secondary);
+      font-family: 'Roboto', sans-serif;
+    }
+  }
+}

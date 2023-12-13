@@ -1,0 +1,21 @@
+.list-product-container {
+  display: flex;
+  height: 100%;
+  gap: 20px;
+
+  .section__title {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .section__divider {
+    flex: 0 0 1px;
+    background-color: var(--color-divider);
+  }
+
+  .filter-section {
+    flex: 0 0 250px;
+    background-color: var(--color-background-soft);
+    height: 100%;
+  }
+}

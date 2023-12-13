@@ -1,3 +1,6 @@
+<script setup lang="ts">
+import BasicLayout from '@/layouts/BasicLayout/index.vue'
+</script>
 <template>
-  <h1>App</h1>
+  <BasicLayout />
 </template>
