@@ -45,7 +45,7 @@ yarn lint
 - Design: Dribble & self
 
 ## Live Demo
-Visit: (UPDATE_LATER)
+Visit: [Shopping cart - Vercel](https://vue-shopping-cart-vert.vercel.app/)
 
 ## Authors
 
