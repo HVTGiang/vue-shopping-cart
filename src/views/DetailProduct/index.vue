@@ -72,7 +72,7 @@ const handleAddToCart = () => {
     </p>
     <div class="product" v-if="product">
       <div class="product__image">
-        <img :src="product?.image" alt="Product image" />
+        <img :src="product?.image" :alt="product.title" />
       </div>
       <div class="product__info">
         <p class="product__category">{{ product?.category }}</p>

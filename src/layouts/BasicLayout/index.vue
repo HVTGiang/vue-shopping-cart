@@ -10,7 +10,7 @@ import DetailProduct from '@/views/DetailProduct/index.vue'
 import Header from '@/components/Header/index.vue'
 
 const productIdToSeeDetail = ref<number>(-1)
-const currentView = ref(AllProducts)
+const currentView = ref<IPage>(AllProducts)
 const cart = ref<ICartItem[]>([])
 
 const actionsToCart = {

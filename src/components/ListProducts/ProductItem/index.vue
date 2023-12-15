@@ -47,8 +47,8 @@ const setProductIdToSeeDetail = inject<(payload: string) => void>('setProductIdT
       <p
         class="product__add-title"
         @click="
-          (e) => {
-            e.stopPropagation()
+          (event) => {
+            event.stopPropagation()
             $emit('addToCart', product)
           }
         "

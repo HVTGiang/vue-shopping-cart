@@ -1,4 +1,12 @@
 <script setup lang="ts">
+const SORT_OPTIONS = {
+  nameASC: 'nameASC',
+  nameDESC: 'nameDESC',
+  priceASC: 'priceASC',
+  priceDESC: 'priceDESC',
+  rateASC: 'rateASC',
+  rateDESC: 'rateDESC'
+}
 import { ref, computed, inject } from 'vue'
 import { cloneDeep, sortBy } from 'lodash'
 
@@ -17,31 +25,31 @@ const props = defineProps<{
 const sortOptions = [
   {
     label: 'Name A - Z',
-    value: 'nameASC'
+    value: SORT_OPTIONS.nameASC
   },
   {
     label: 'Name Z - A',
-    value: 'nameDESC'
+    value: SORT_OPTIONS.nameDESC
   },
   {
     label: 'Price ASC',
-    value: 'priceASC'
+    value: SORT_OPTIONS.priceASC
   },
   {
     label: 'Price DESC',
-    value: 'priceDESC'
+    value: SORT_OPTIONS.priceDESC
   },
   {
     label: 'Rate ASC',
-    value: 'rateASC'
+    value: SORT_OPTIONS.rateASC
   },
   {
     label: 'Rate DESC',
-    value: 'rateDESC'
+    value: SORT_OPTIONS.rateDESC
   }
 ]
 
-const currentSortOption = ref(sortOptions[0].value)
+const currentSortOption = ref<string>(sortOptions[0].value)
 const searchString = ref<string>('')
 
 const cart = inject<{
@@ -55,22 +63,22 @@ const cart = inject<{
 const showProducts = computed(() => {
   let newProductsList = cloneDeep(props.products)
   switch (currentSortOption.value) {
-    case 'nameASC':
+    case SORT_OPTIONS.nameASC:
       newProductsList = sortBy(newProductsList, ['title'])
       break
-    case 'nameDESC':
+    case SORT_OPTIONS.nameDESC:
       newProductsList = sortBy(newProductsList, ['title']).reverse()
       break
-    case 'priceASC':
+    case SORT_OPTIONS.priceASC:
       newProductsList = sortBy(newProductsList, ['price'])
       break
-    case 'priceDESC':
+    case SORT_OPTIONS.priceDESC:
       newProductsList = sortBy(newProductsList, ['price']).reverse()
       break
-    case 'rateASC':
+    case SORT_OPTIONS.rateASC:
       newProductsList = sortBy(newProductsList, ['rating.rate'])
       break
-    case 'rateDESC':
+    case SORT_OPTIONS.rateDESC:
       newProductsList = sortBy(newProductsList, ['rating.rate']).reverse()
       break
     default:
@@ -91,7 +99,6 @@ const handleAddToCart = (product: IProduct) => {
 
 const handleSearch = (payload: string) => {
   searchString.value = payload
-  console.log(payload);
 }
 </script>
 

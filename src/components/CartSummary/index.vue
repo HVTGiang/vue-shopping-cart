@@ -22,7 +22,6 @@ const cart = inject<{
 }>('cart')
 const navigateTo = inject<(page: IPage) => void>('navigateTo')
 
-
 const shouldShowCartSummary = ref<boolean>(false)
 
 const renderCountText = computed(() => {
@@ -67,7 +66,13 @@ const openCartSummary = () => {
             :key="index"
             :cart-item="item"
           />
-          <div class="cart__body-more" v-if="cart && cart?.cart.value.length > 5">See all</div>
+          <div
+            class="cart__body-more"
+            v-if="cart && cart?.cart.value.length > 5"
+            @click="() => navigateTo && navigateTo(Checkout)"
+          >
+            See all
+          </div>
           <div class="cart__body-placeholder" v-if="cart?.cart.value.length === 0">
             Your cart is empty
           </div>

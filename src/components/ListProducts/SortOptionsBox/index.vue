@@ -10,7 +10,7 @@ const emit = defineEmits<{
   (eventName: 'changeOption', payload: string): void
 }>()
 
-const isOpenOptionsMenu = ref(false)
+const isOpenOptionsMenu = ref<boolean>(false)
 
 const closeOptionsMenu = () => {
   isOpenOptionsMenu.value = false

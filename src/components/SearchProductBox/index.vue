@@ -16,7 +16,7 @@ defineEmits<{
       class="input-field"
       type="text"
       placeholder="Search here"
-      @input="(e) => $emit('search', (e.target as HTMLInputElement).value)"
+      @input="(event) => $emit('search', (event.target as HTMLInputElement).value)"
     />
   </div>
 </template>

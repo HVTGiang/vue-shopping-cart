@@ -106,7 +106,7 @@ const filterNonNumberic = (event: Event) => {
     </div>
     <div class="item__category">{{ props.cartItem.item.category }}</div>
     <div class="item__price">{{ props.cartItem.item.price }}</div>
-    <div class="item__quantity" @click="(e) => e.stopPropagation()">
+    <div class="item__quantity" @click="(event) => event.stopPropagation()">
       <p class="quantity__sub quantity__button" @click="handleSubQuantityOne">-</p>
       <input
         type="number"
@@ -125,8 +125,8 @@ const filterNonNumberic = (event: Event) => {
       <p
         class="item__delete-btn"
         @click="
-          (e) => {
-            e.stopPropagation()
+          (event) => {
+            event.stopPropagation()
             shouldShowModal = true
             modalTitle = 'DELETE'
           }

@@ -17,7 +17,7 @@ defineProps<{
     @click="() => setProductIdToSeeDetail && setProductIdToSeeDetail(cartItem.item.id + '')"
   >
     <div class="item__image">
-      <img :src="cartItem.item.image" alt="Product item" />
+      <img :src="cartItem.item.image" :alt="cartItem.item.title" />
     </div>
     <div class="item__info">
       <p class="item__title">{{ cartItem.item.title }}</p>

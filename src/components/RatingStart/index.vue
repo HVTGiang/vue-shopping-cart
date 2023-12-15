@@ -32,11 +32,11 @@ const startType = (index: number) => {
 <template>
   <div class="rating-starts">
     <OhVueIcon
-      v-for="i in Array.from({ length: 5 }, (_, i: number) => i + 1)"
-      :name="startType(i as number)"
+      v-for="index in Array.from({ length: 5 }, (_, index: number) => index + 1)"
+      :name="startType(index as number)"
       :scale="scale || 1"
       class="rating-starts__star"
-      :key="(i as number)"
+      :key="(index as number)"
       fill="#ffcc02"
     ></OhVueIcon>
   </div>

@@ -47,7 +47,7 @@ const totalPrice = computed(() => {
         <Item v-for="(item, index) in cart.cart.value" :key="index" :cart-item="item" />
       </div>
     </div>
-    <div class="cart-items--placeholder" v-else>Your cart is empty1</div>
+    <div class="cart-items--placeholder" v-else>Your cart is empty</div>
     <div class="section__footer">
       <div class="footer__inner">
         <p class="footer__count">Total {{ cart?.cart.value.length || 0 }} items</p>
