@@ -26,6 +26,7 @@ onMounted(async () => {
   <div class="list-product-container">
     <div class="filter-section">
       <p class="section__title">Filter</p>
+      <p class="section__desc">Updating...</p>
     </div>
     <div class="section__divider"></div>
     <ListProduct :products="(products as IProduct[]) || mockData" />

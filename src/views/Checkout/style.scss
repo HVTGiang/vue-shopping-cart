@@ -10,6 +10,25 @@
     & > .section__title {
       font-size: 20px;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    & .section__back-btn---icon {
+      cursor: pointer;
+      display: block;
+      padding: 10px;
+      background-color: var(--color-background-soft);
+      border-radius: 10px;
+
+      &:hover {
+        background-color: var(--color-gray-3);
+      }
+
+      &:active {
+        background-color: var(--color-gray-main);
+      }
     }
 
     & > .section__back-to-shop-btn {

@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import { inject } from 'vue'
 
+import type { IPage } from '@/layouts/BasicLayout/pageTypes'
+
+import AllProducts from '@/views/AllProducts/index.vue'
 import CartSummary from '@/components/CartSummary/index.vue'
 
+const navigateTo = inject<(page: IPage) => void>('navigateTo')
 </script>
 
 <template>
   <div class="header-container">
-    <p class="header__logo">GiangHVT</p>
+    <p class="header__logo" @click="() => navigateTo && navigateTo(AllProducts)">GiangHVT</p>
     <ul class="header__menu">
       <li class="header__menu-item">New & featured</li>
       <li class="header__menu-item">Men</li>

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { inject, computed } from 'vue'
+import { RiArrowLeftSLine } from 'oh-vue-icons/icons'
+import { OhVueIcon, addIcons } from 'oh-vue-icons'
 
 import type { ICartItem } from '@/core/interfaces/models/cart'
 import type { IProduct } from '@/core/interfaces/models/product'
@@ -7,6 +9,8 @@ import type { IPage } from '@/layouts/BasicLayout/pageTypes'
 
 import AllProducts from '@/views/AllProducts/index.vue'
 import Item from './Item/index.vue'
+
+addIcons(RiArrowLeftSLine)
 
 const cart = inject<{
   cart: { value: ICartItem[] }
@@ -24,12 +28,20 @@ const totalPrice = computed(() => {
 
   return total?.toFixed(2)
 })
+
 </script>
 
 <template>
   <div class="checkout-section">
     <div class="section__header">
-      <p class="section__title">Your shopping cart</p>
+      <div class="section__title">
+        <OhVueIcon
+          :name="RiArrowLeftSLine.name"
+          class="section__back-btn---icon"
+          @click="navigateTo && navigateTo(AllProducts)"
+        />
+        <p>Your shopping cart</p>
+      </div>
       <div class="section__back-to-shop-btn" @click="navigateTo && navigateTo(AllProducts)">
         Continue shopping
       </div>
