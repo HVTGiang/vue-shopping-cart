@@ -6,6 +6,7 @@ addIcons(RiStarSFill, RiStarSLine, RiStarHalfSLine)
 
 const props = defineProps<{
   rate: number
+  scale?: number
 }>()
 
 const startType = (index: number) => {
@@ -15,14 +16,17 @@ const startType = (index: number) => {
 
   if (index <= flooredRate) return RiStarSFill.name
 
-  if (Math.abs(rate - flooredRate) <= 0.25) {
+  if (Math.abs(rate - flooredRate) < 0.25) {
     return index <= flooredRate ? RiStarSFill.name : RiStarSLine.name
   }
-  if (Math.abs(rate - ceiledRate) <= 0.25) {
+  if (Math.abs(rate - ceiledRate) < 0.25) {
     return index <= ceiledRate ? RiStarSFill.name : RiStarSLine.name
   }
-  return RiStarHalfSLine.name
+  if (Math.abs(rate - (ceiledRate + flooredRate) / 2) <= 0.25) {
+    return index <= ceiledRate ? RiStarHalfSLine.name : RiStarSLine.name
+  }
 }
+
 </script>
 
 <template>
@@ -30,10 +34,11 @@ const startType = (index: number) => {
     <OhVueIcon
       v-for="i in Array.from({ length: 5 }, (_, i: number) => i + 1)"
       :name="startType(i as number)"
+      :scale="scale || 1"
       class="rating-starts__star"
       :key="(i as number)"
       fill="#ffcc02"
-    />
+    ></OhVueIcon>
   </div>
 </template>
 

@@ -12,10 +12,32 @@
     padding: 5px 20px;
     border-radius: 8px;
     background-color: var(--color-background-soft);
+    transition: background-color 0.2s;
+    position: relative;
+    z-index: 1;
+
+    &:hover {
+      background-color: var(--color-gray-3);
+    }
+    &:active {
+      background-color: var(--color-gray-main);
+    }
+  }
+
+  & .sort__modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    z-index: 0;
   }
 
   & .sort__options {
     position: absolute;
+    overflow: hidden;
+    z-index: 1;
     right: 0;
     top: 120%;
     background-color: var(--color-background-main);

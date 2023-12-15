@@ -1,0 +1,108 @@
+.checkout-section {
+  height: 100%;
+  padding-bottom: 100px;
+
+  .section__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > .section__title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    & > .section__back-to-shop-btn {
+      padding: 4px 12px;
+      background-color: var(--color-beige-light);
+      border-radius: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--color-beige-main);
+      }
+    }
+  }
+
+  .cart-items {
+    width: 100%;
+    margin-top: 20px;
+
+    .cart__row {
+      display: grid;
+      grid-template-columns: 3fr 2fr 1fr 1fr 1fr 1fr;
+      gap: 30px;
+      border-bottom: 1px solid var(--color-divider);
+
+      .header__cell {
+        width: 100%;
+        // background-color: var(--color-background-soft);
+        color: var(--color-text-secondary);
+      }
+      .header__cell--left {
+        text-align: left;
+      }
+      .header__cell--right {
+        text-align: right;
+      }
+      .header__cell--center {
+        text-align: center;
+      }
+    }
+
+    &--placeholder {
+      margin-top: 20px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      padding: 50px;
+      background-color: var(--color-background-soft);
+    }
+  }
+
+  & .section__divider {
+    flex: 0 0 1px;
+    background-color: var(--color-divider);
+  }
+
+  & > .section__footer {
+    background-color: var(--color-background-main);
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 3px 1px var(--color-gray-3);
+
+    & > .footer__inner {
+      max-width: 1280px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      & > .footer__count {
+        flex: 1;
+      }
+
+      & > .footer__total-price {
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      & > .footer__checkout-btn {
+        cursor: pointer;
+        padding: 8px 25px;
+        font-weight: 700;
+        background-color: var(--color-beige-main);
+        border-radius: 8px;
+      }
+    }
+  }
+}

@@ -16,6 +16,8 @@
   --color-beige-main: #edebca;
 
   --color-tomato-main: #ff5722;
+
+  --color-green-main: #32d74b;
 }
 
 /* semantic color variables for this project */
@@ -27,4 +29,6 @@
   --color-background-soft: var(--color-gray-5);
 
   --color-divider: var(--color-gray-3);
+
+  --color-success-main: var(--color-green-main);
 }

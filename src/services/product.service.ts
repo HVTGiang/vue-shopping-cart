@@ -25,3 +25,16 @@ export const getAllProduct = async (request?: IGetAllProductRequest) => {
     throw new Error((err as AxiosError).message)
   }
 }
+
+export const getProductById = async (id: string) => {
+  try {
+    const res = await api.get<IProduct>(`/products/${id}`)
+
+    if (res) {
+      return res as unknown as IProduct
+    }
+  } catch (err) {
+    // custom message here
+    throw new Error((err as AxiosError).message)
+  }
+}

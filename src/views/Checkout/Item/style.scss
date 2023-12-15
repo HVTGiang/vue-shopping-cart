@@ -1,0 +1,112 @@
+.cart__item {
+  margin-top: 10px;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr 1fr 1fr 1fr;
+  gap: 30px;
+  border-bottom: 1px solid var(--color-divider);
+
+  & > .item__info {
+    display: flex;
+    align-items: center;
+
+    & > .item__image {
+      width: 120px;
+      height: 120px;
+      padding: 10px;
+      padding-left: 0;
+
+      & > img {
+        width: 90%;
+        height: 90%;
+        object-fit: contain;
+      }
+    }
+
+    & .item__title {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      font-weight: 700;
+    }
+  }
+  & > .item__category {
+    display: flex;
+    align-items: center;
+  }
+  & > .item__price {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+  & > .item__quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > .quantity__input {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--color-divider);
+      border-radius: 8px;
+      text-align: center;
+      margin: 0 10px;
+      font-weight: 700;
+      appearance: none;
+      caret-color: transparent;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      &[type='number'] {
+        -moz-appearance: textfield;
+      }
+    }
+
+    & > .quantity__button {
+      height: 30px;
+      width: 30px;
+      background-color: var(--color-background-soft);
+      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: var(--color-gray-3);
+      }
+    }
+  }
+  & > .item__subtotal {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-weight: 700;
+  }
+  & > .item__actions {
+    // height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > .item__delete-btn {
+      width: 100%;
+      padding: 4px 8px;
+      background-color: var(--color-background-main);
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid var(--color-tomato-main);
+      color: var(--color-tomato-main);
+
+      &:hover {
+        background-color: var(--color-tomato-main);
+        color: var(--color-white-main);
+      }
+    }
+  }
+}

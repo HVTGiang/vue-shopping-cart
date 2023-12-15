@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import ListProduct from '@/components/ListProducts/index.vue'
-import type { IProduct } from '@/core/interfaces/models/product'
+
 import { getAllProduct } from '@/services/product.service'
+import mockData from '@/core/constants/mockData.json'
+
+import type { IProduct } from '@/core/interfaces/models/product'
+
+import ListProduct from '@/components/ListProducts/index.vue'
 
 const products = ref<IProduct[] | undefined>()
 
@@ -11,12 +15,9 @@ onMounted(async () => {
     const response = await getAllProduct()
 
     products.value = response
-
   } catch (error) {
-
     // handle error (alert)
     console.log(error)
-
   }
 })
 </script>
@@ -27,7 +28,7 @@ onMounted(async () => {
       <p class="section__title">Filter</p>
     </div>
     <div class="section__divider"></div>
-    <ListProduct :products="products" />
+    <ListProduct :products="(products as IProduct[]) || mockData" />
   </div>
 </template>
 

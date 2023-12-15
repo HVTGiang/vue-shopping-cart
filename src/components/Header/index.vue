@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import SearchProductBox from '@/components/SearchProductBox/index.vue'
+
 import CartSummary from '@/components/CartSummary/index.vue'
+
 </script>
 
 <template>
