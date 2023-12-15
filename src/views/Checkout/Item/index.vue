@@ -58,7 +58,7 @@ const handleChangeQuantity = (payload: number) => {
   newQuantity.value = payload
   // Set a new timer for 500 milliseconds
 
-  timer.value = setTimeout(() => {
+  timer.value = window.setTimeout(() => {
     shouldShowModal.value = true
     modalTitle.value = 'UPDATE'
   }, 1000)
