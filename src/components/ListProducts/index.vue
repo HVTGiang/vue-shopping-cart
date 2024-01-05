@@ -7,14 +7,11 @@ const SORT_OPTIONS = {
   rateASC: 'rateASC',
   rateDESC: 'rateDESC'
 }
-import { ref, computed, inject } from 'vue'
+import { ref, computed } from 'vue'
 import { cloneDeep, sortBy } from 'lodash'
-
 import SearchProductBox from '@/components/SearchProductBox/index.vue'
-
 import type { IProduct } from '@/core/interfaces/models/product'
-import type { ICartItem } from '@/core/interfaces/models/cart'
-
+import { useCart } from '@/core/store/cart'
 import ProductItem from './ProductItem/index.vue'
 import SortOptionsBox from './SortOptionsBox/index.vue'
 
@@ -52,13 +49,7 @@ const sortOptions = [
 const currentSortOption = ref<string>(sortOptions[0].value)
 const searchString = ref<string>('')
 
-const cart = inject<{
-  cart: { value: ICartItem[] }
-  actions: {
-    addToCart: (product: IProduct, payload: number) => void
-    deleteItem: (product: IProduct) => void
-  }
-}>('cart')
+const cart = useCart()
 
 const showProducts = computed(() => {
   let newProductsList = cloneDeep(props.products)
@@ -94,7 +85,7 @@ const showProducts = computed(() => {
 })
 
 const handleAddToCart = (product: IProduct) => {
-  cart?.actions.addToCart(product, 1)
+  cart.addToCart(product, 1)
 }
 
 const handleSearch = (payload: string) => {

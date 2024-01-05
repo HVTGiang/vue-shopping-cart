@@ -1,33 +1,29 @@
 <script setup lang="ts">
-import { ref, onMounted, inject } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
 import { LaCartPlusSolid } from 'oh-vue-icons/icons'
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
-
-import type { ICartItem } from '@/core/interfaces/models/cart'
-import type { IProduct } from '@/core/interfaces/models/product'
-
-import { getProductById } from '@/services/product.service'
-
 import RatingStar from '@/components/RatingStart/index.vue'
+
+import type { IProduct } from '@/core/interfaces/models/product'
+import { getProductById } from '@/services/product.service'
+import routeEndpoints from '@/router/route.endpoints'
+import { useCart } from '@/core/store'
 
 addIcons(LaCartPlusSolid)
 
 const product = ref<IProduct>()
 const currentQuantity = ref<number>(1)
 
-const productId = inject<{ value: string }>('productIdToSeeDetail')
-const setProductIdToSeeDetail = inject<(payload: number) => void>('setProductIdToSeeDetail')
-const cart = inject<{
-  cart: { value: ICartItem[] }
-  actions: {
-    addToCart: (product: IProduct, payload: number) => void
-    deleteItem: (product: IProduct) => void
-  }
-}>('cart')
+const router = useRouter()
+const { id: productId } = router.currentRoute.value.params
+
+const cart = useCart()
 
 onMounted(async () => {
   try {
-    const res = await getProductById(productId?.value as string)
+    const res = await getProductById(productId as string)
 
     product.value = res
   } catch (error) {
@@ -35,10 +31,6 @@ onMounted(async () => {
     console.log(error)
   }
 })
-
-const navigateToHome = () => {
-  setProductIdToSeeDetail && setProductIdToSeeDetail(-1)
-}
 
 const filterNonNumberic = (event: Event) => {
   const key = (event as KeyboardEvent).key
@@ -61,14 +53,35 @@ const handleAddOne = () => {
 }
 
 const handleAddToCart = () => {
-  cart?.actions.addToCart(product.value as IProduct, currentQuantity.value)
+  cart.addToCart(product.value as IProduct, currentQuantity.value)
 }
+
+const breadcrumsItem = () => [
+  {
+    title: 'Products',
+    disabled: false,
+    href: routeEndpoints.home.path
+  },
+  {
+    title: product.value?.title as string,
+    disabled: true,
+    href: ''
+  }
+]
 </script>
 <template>
   <div class="detail-product-section">
     <p class="section__title">
-      <span class="section__break-item" @click="navigateToHome">Products</span>
-      <span class="section__break-item section__break-item--current">{{ product?.title }}</span>
+      <VBreadcrumbs :items="breadcrumsItem()" divider="/">
+        <template #item="{ item }">
+          <router-link
+            :to="item.href"
+            :class="['section__break-item ', { 'section__break-item--disabled': item.disabled }]"
+          >
+            {{ item.title }}
+          </router-link>
+        </template>
+      </VBreadcrumbs>
     </p>
     <div class="product" v-if="product">
       <div class="product__image">

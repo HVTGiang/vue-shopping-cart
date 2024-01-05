@@ -1,17 +1,14 @@
 <script setup lang="ts">
-import { inject } from 'vue'
-
-import type { IPage } from '@/layouts/BasicLayout/pageTypes'
-
-import AllProducts from '@/views/AllProducts/index.vue'
+import { useRouter } from 'vue-router'
+import routeEndpoints from '@/router/route.endpoints'
 import CartSummary from '@/components/CartSummary/index.vue'
 
-const navigateTo = inject<(page: IPage) => void>('navigateTo')
+const router = useRouter()
 </script>
 
 <template>
   <div class="header-container">
-    <p class="header__logo" @click="() => navigateTo && navigateTo(AllProducts)">GiangHVT</p>
+    <p class="header__logo" @click="() => router.push(routeEndpoints.home.path)">GiangHVT</p>
     <ul class="header__menu">
       <li class="header__menu-item">New & featured</li>
       <li class="header__menu-item">Men</li>

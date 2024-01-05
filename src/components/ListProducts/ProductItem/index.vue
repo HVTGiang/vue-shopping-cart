@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { inject } from 'vue'
+import { useRouter } from 'vue-router'
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
 import { RiStarSFill, LaCartPlusSolid } from 'oh-vue-icons/icons'
-
+import routeEndpoints from '@/router/route.endpoints'
 import type { IProduct } from '@/core/interfaces/models/product'
-
 import RatingStart from '@/components/RatingStart/index.vue'
+
+const router = useRouter()
 
 addIcons(RiStarSFill, LaCartPlusSolid)
 
@@ -16,16 +17,19 @@ defineProps<{
 defineEmits<{
   (eventName: 'addToCart', product: IProduct): void
 }>()
-
-const setProductIdToSeeDetail = inject<(payload: string) => void>('setProductIdToSeeDetail')
-
 </script>
 
 <template>
   <div
     class="product"
     @click="
-      () => setProductIdToSeeDetail && setProductIdToSeeDetail(product.id as unknown as string)
+      () =>
+        router.push({
+          name: routeEndpoints.productDetail.name,
+          params: {
+            id: product.id
+          }
+        })
     "
   >
     <div class="product__image">

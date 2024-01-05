@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { inject, ref } from 'vue'
-
-import type { ICartItem } from '@/core/interfaces/models/cart'
-import type { IProduct } from '@/core/interfaces/models/product'
-
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Modal from '@/components/Modal/index.vue'
+import type { ICartItem } from '@/core/interfaces/models/cart'
+import { useCart } from '@/core/store'
+import routeEndpoints from '@/router/route.endpoints'
 
 const props = defineProps<{
   cartItem: ICartItem
@@ -15,19 +15,13 @@ const newQuantity = ref<number>(0)
 const timer = ref<number>()
 const modalTitle = ref<string>('')
 
-const cart = inject<{
-  cart: { value: ICartItem[] }
-  actions: {
-    addToCart: (product: IProduct, payload: number) => void
-    deleteItem: (product: IProduct) => void
-  }
-}>('cart')
-const setProductIdToSeeDetail = inject<(payload: string) => void>('setProductIdToSeeDetail')
+const cart = useCart()
+const router = useRouter()
 
 const handleDecide = (decision: string) => {
   if (modalTitle.value === 'DELETE') {
     if (decision === 'accept') {
-      cart?.actions.deleteItem(props.cartItem.item)
+      cart.deleteItem(props.cartItem.item)
       return
     }
   } else {
@@ -42,13 +36,13 @@ const handleDecide = (decision: string) => {
 
 const handleSubQuantityOne = () => {
   if (props.cartItem.quantity > 1) {
-    cart?.actions.addToCart(props.cartItem.item, -1)
+    cart.addToCart(props.cartItem.item, -1)
   } else {
     shouldShowModal.value = true
   }
 }
 const handleAddQuantity = () => {
-  cart?.actions.addToCart(props.cartItem.item, 1)
+  cart.addToCart(props.cartItem.item, 1)
 }
 
 const handleChangeQuantity = (payload: number) => {
@@ -65,7 +59,7 @@ const handleChangeQuantity = (payload: number) => {
 }
 
 const changeQuantity = (payload: number) => {
-  cart?.actions.addToCart(props.cartItem.item, payload)
+  cart.addToCart(props.cartItem.item, payload)
 }
 
 const handleChangeInput = (event: Event) => {
@@ -94,7 +88,13 @@ const filterNonNumberic = (event: Event) => {
 <template>
   <div
     class="cart__row cart__item"
-    @click="() => setProductIdToSeeDetail && setProductIdToSeeDetail(cartItem.item.id + '')"
+    @click="
+      () =>
+        router.push({
+          name: routeEndpoints.productDetail.name,
+          params: { id: props.cartItem.item.id }
+        })
+    "
   >
     <div class="item__info">
       <div class="item__image">

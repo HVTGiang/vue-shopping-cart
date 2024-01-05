@@ -12,28 +12,19 @@
 
   & .section__break-item {
     cursor: pointer;
-    color: var(--color-gray-main);
-
-    &::after {
-      content: '>';
-      display: inline-block;
-      margin: 0 10px;
-    }
+    color: var(--color-text-main);
+    text-decoration: none;
 
     &:hover {
-      background-color: var(--color-gray-5);
+      font-weight: 700;
     }
   }
 
-  & .section__break-item--current {
-    cursor: pointer;
-    color: var(--color-text-main);
-    font-weight: 700;
-
-    &::after {
-      content: '';
-      display: none;
-      margin: 0 10px;
+  & .section__break-item--disabled {
+    color: var(--color-gray-main);
+    cursor: auto;
+    &:hover {
+      font-weight: 400;
     }
   }
 

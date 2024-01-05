@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-
 import { getAllProduct } from '@/services/product.service'
 import mockData from '@/core/constants/mockData.json'
-
 import type { IProduct } from '@/core/interfaces/models/product'
-
 import ListProduct from '@/components/ListProducts/index.vue'
+import LoadingSpinner from '@/components/LoadingSpinner/index.vue'
 
 const products = ref<IProduct[] | undefined>()
 
@@ -29,7 +27,8 @@ onMounted(async () => {
       <p class="section__desc">Updating...</p>
     </div>
     <div class="section__divider"></div>
-    <ListProduct :products="(products as IProduct[]) || mockData" />
+    <ListProduct :products="(products as IProduct[]) || mockData" v-if="products" />
+    <LoadingSpinner v-else />
   </div>
 </template>
 

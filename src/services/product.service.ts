@@ -1,12 +1,11 @@
-import type { IGetAllProductResponse } from '@/core/interfaces/responses/product.response'
 import type { IGetAllProductRequest } from '@/core/interfaces/requests/product.request'
 import api from './axios.service'
 import type { AxiosError } from 'axios'
 import type { IProduct } from '@/core/interfaces/models/product'
-
+import products from '@/core/helper/api/endpoints/products'
 export const getAllProduct = async (request?: IGetAllProductRequest) => {
   try {
-    let url = '/products'
+    let url = products.getAll
 
     if (request) {
       const { limit, sort } = request
@@ -28,7 +27,7 @@ export const getAllProduct = async (request?: IGetAllProductRequest) => {
 
 export const getProductById = async (id: string) => {
   try {
-    const res = await api.get<IProduct>(`/products/${id}`)
+    const res = await api.get<IProduct>(products.getById(id))
 
     if (res) {
       return res as unknown as IProduct

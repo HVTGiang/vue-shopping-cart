@@ -1,34 +1,26 @@
 <script setup lang="ts">
-import { inject, computed } from 'vue'
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+
 import { RiArrowLeftSLine } from 'oh-vue-icons/icons'
 import { OhVueIcon, addIcons } from 'oh-vue-icons'
-
-import type { ICartItem } from '@/core/interfaces/models/cart'
-import type { IProduct } from '@/core/interfaces/models/product'
-import type { IPage } from '@/layouts/BasicLayout/pageTypes'
-
-import AllProducts from '@/views/AllProducts/index.vue'
 import Item from './Item/index.vue'
+
+import { useCart } from '@/core/store'
+import routeEndpoints from '@/router/route.endpoints'
 
 addIcons(RiArrowLeftSLine)
 
-const cart = inject<{
-  cart: { value: ICartItem[] }
-  actions: {
-    addToCart: (product: IProduct, payload: number) => void
-    deleteItem: (product: IProduct) => void
-  }
-}>('cart')
-const navigateTo = inject<(page: IPage) => void>('navigateTo')
+const cart = useCart()
+const router = useRouter()
 
 const totalPrice = computed(() => {
-  const total = cart?.cart.value.reduce((acc, item) => {
+  const total = cart.listItems.reduce((acc, item) => {
     return acc + item.item.price * item.quantity
   }, 0)
 
   return total?.toFixed(2)
 })
-
 </script>
 
 <template>
@@ -38,15 +30,15 @@ const totalPrice = computed(() => {
         <OhVueIcon
           :name="RiArrowLeftSLine.name"
           class="section__back-btn---icon"
-          @click="navigateTo && navigateTo(AllProducts)"
+          @click="() => router.push(routeEndpoints.home.path)"
         />
         <p>Your shopping cart</p>
       </div>
-      <div class="section__back-to-shop-btn" @click="navigateTo && navigateTo(AllProducts)">
+      <div class="section__back-to-shop-btn" @click="() => router.push(routeEndpoints.home.path)">
         Continue shopping
       </div>
     </div>
-    <div class="cart-items" v-if="cart && cart.cart.value && cart.cart.value.length > 0">
+    <div class="cart-items" v-if="cart && cart.listItems && cart.listItems.length > 0">
       <div class="cart__row cart__row--header">
         <div class="header__cell header__cell--left">Item</div>
         <div class="header__cell header__cell--left">Category</div>
@@ -56,13 +48,13 @@ const totalPrice = computed(() => {
         <div class="header__cell"></div>
       </div>
       <div class="cart__body">
-        <Item v-for="(item, index) in cart.cart.value" :key="index" :cart-item="item" />
+        <Item v-for="(item, index) in cart.listItems" :key="index" :cart-item="item" />
       </div>
     </div>
     <div class="cart-items--placeholder" v-else>Your cart is empty</div>
     <div class="section__footer">
       <div class="footer__inner">
-        <p class="footer__count">Total {{ cart?.cart.value.length || 0 }} items</p>
+        <p class="footer__count">Total {{ cart.listItems.length || 0 }} items</p>
         <div class="footer__total-price">${{ totalPrice }}</div>
         <div class="footer__checkout-btn">Checkout</div>
       </div>

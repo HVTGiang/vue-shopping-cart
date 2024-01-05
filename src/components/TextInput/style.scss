@@ -1,0 +1,9 @@
+.text-input {
+  & .v-field--variant-solo {
+    box-shadow: unset;
+  }
+
+  & .v-filed--focused {
+    border-color: transparent;
+  }
+}

@@ -1,20 +1,25 @@
 <script setup lang="ts">
-import { inject } from 'vue'
-
 import type { ICartItem } from '@/core/interfaces/models/cart'
-
-const setProductIdToSeeDetail = inject<(payload: string) => void>('setProductIdToSeeDetail')
+import routeEndpoints from '@/router/route.endpoints'
+import { useRouter } from 'vue-router'
 
 defineProps<{
   cartItem: ICartItem
 }>()
 
+const router = useRouter()
 </script>
 
 <template>
   <div
     class="product-item"
-    @click="() => setProductIdToSeeDetail && setProductIdToSeeDetail(cartItem.item.id + '')"
+    @click="
+      () =>
+        router.push({
+          name: routeEndpoints.productDetail.name,
+          params: { id: $props.cartItem.item.id }
+        })
+    "
   >
     <div class="item__image">
       <img :src="cartItem.item.image" :alt="cartItem.item.title" />

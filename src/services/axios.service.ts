@@ -1,6 +1,6 @@
 import { ENV_CONFIG } from '@/core/constants/app'
 import axios, { type AxiosRequestConfig } from 'axios'
-
+import { StatusCodes } from 'http-status-codes'
 const instance = axios.create({
   baseURL: ENV_CONFIG.API_BASE_URL,
   headers: {
@@ -28,14 +28,13 @@ instance.interceptors.response.use(
     const statusCode = response?.data?.status_code
 
     switch (statusCode) {
-
-      case 400:
+      case StatusCodes.BAD_REQUEST:
         return
 
-      case 401:
+      case StatusCodes.UNAUTHORIZED:
         return
 
-      case 500:
+      case StatusCodes.INTERNAL_SERVER_ERROR:
         return
 
       default:
